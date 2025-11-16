@@ -26,7 +26,6 @@ function setAudioUIState(isPlaying) {
 if (introAudio) {
   introAudio.volume = 0.9;
 
-  // Start with UI as "On" + bars moving
   setAudioUIState(true);
 
   introAudio
@@ -35,7 +34,8 @@ if (introAudio) {
       // playing successfully
     })
     .catch(() => {
-      // Browser blocked autoplay: UI still shows On, sound will come when user presses the toggle
+      // Browser blocked autoplay: UI still shows On,
+      // sound will come when user presses the toggle
     });
 }
 
@@ -43,7 +43,6 @@ if (introAudio) {
 if (audioToggleBtn && introAudio) {
   audioToggleBtn.addEventListener("click", () => {
     if (introAudio.paused) {
-      // Turn ON
       introAudio
         .play()
         .then(() => setAudioUIState(true))
@@ -51,7 +50,6 @@ if (audioToggleBtn && introAudio) {
           setAudioUIState(true);
         });
     } else {
-      // Turn OFF
       introAudio.pause();
       setAudioUIState(false);
     }
@@ -80,7 +78,7 @@ document.querySelectorAll("[data-scroll-target]").forEach((btn) => {
   });
 });
 
-// ---------- INTERSECTION OBSERVER (SCENE TRANSITIONS) ----------
+// ---------- INTERSECTION OBSERVER (SCENE VISIBILITY + DOTS) ----------
 const scenes = document.querySelectorAll(".scene");
 const dots = document.querySelectorAll(".scene-dot");
 
@@ -92,7 +90,6 @@ const observer = new IntersectionObserver(
       if (entry.isIntersecting) {
         scene.classList.add("is-visible");
 
-        // update dots
         const sceneId = scene.getAttribute("id");
         dots.forEach((dot) => {
           const target = dot.getAttribute("data-target");
@@ -136,29 +133,61 @@ if (scenesContainer && window.matchMedia("(pointer: fine)").matches) {
   });
 }
 
-// ---------- PARALLAX BACKGROUNDS ----------
-function updateParallax() {
+// ---------- SCROLL-BASED SCENE ANIMATION ----------
+function updateSceneScrollEffects() {
   if (!scenesContainer) return;
 
-  const viewportCenter = window.innerHeight / 2;
+  const viewportHeight = window.innerHeight;
+  const viewportCenter = viewportHeight / 2;
 
   scenes.forEach((scene) => {
-    const bg = scene.querySelector(".scene-bg");
-    if (!bg) return;
-
     const rect = scene.getBoundingClientRect();
     const sceneCenter = rect.top + rect.height / 2;
-    const offset = sceneCenter - viewportCenter; // positive = below center
 
-    const intensity = -offset * 0.06; // tweak multiplier for strength
-    bg.style.transform = `scale(1.1) translate3d(0, ${intensity}px, 0)`;
+    // Distance of scene center from viewport center
+    const distance = Math.abs(sceneCenter - viewportCenter);
+
+    // Normalize to 0–1: 1 when centered, ~0 when far away
+    let progress = 1 - distance / (viewportHeight * 0.75);
+    if (progress < 0) progress = 0;
+    if (progress > 1) progress = 1;
+
+    scene.style.setProperty("--scene-progress", progress.toString());
+
+    const bg = scene.querySelector(".scene-bg");
+    const overlay = scene.querySelector(".scene-overlay");
+    const card = scene.querySelector(".scene-copy");
+
+    // Background zoom + vertical ease
+    if (bg) {
+      const zoom = 1.25 - progress * 0.15; // from 1.25 down to ~1.10
+      const translateY = 40 - progress * 40; // from 40px down to 0
+      bg.style.transform = `scale(${zoom}) translate3d(0, ${translateY}px, 0)`;
+    }
+
+    // Overlay opacity ramp
+    if (overlay) {
+      const overlayOpacity = 0.15 + progress * 0.85; // 0.15 -> 1.0
+      overlay.style.opacity = overlayOpacity.toString();
+    }
+
+    // Card (glass overlay + text) fade/slide in
+    if (card) {
+      // Start card motion a bit later so BG gets a head start
+      const cardProgress = Math.max(0, (progress - 0.2) / 0.8); // 0 at 0.2, 1 at 1
+      const opacity = cardProgress;
+      const translateY = (1 - cardProgress) * 32; // 32px -> 0
+
+      card.style.opacity = opacity.toString();
+      card.style.transform = `translateY(${translateY}px)`;
+    }
   });
 }
 
 if (scenesContainer) {
-  scenesContainer.addEventListener("scroll", updateParallax);
-  window.addEventListener("resize", updateParallax);
-  window.addEventListener("load", updateParallax);
+  scenesContainer.addEventListener("scroll", updateSceneScrollEffects);
+  window.addEventListener("resize", updateSceneScrollEffects);
+  window.addEventListener("load", updateSceneScrollEffects);
 }
 
 // ---------- OVERLAYS (CHARACTERS & TEASER) ----------
@@ -176,7 +205,6 @@ const teaserOverlayBackdrop = document.getElementById(
 const openTeaserBtn = document.getElementById("open-teaser-modal");
 const closeTeaserBtn = document.getElementById("close-teaser");
 
-// Helpers to open/close overlays
 function openOverlay(el) {
   if (!el) return;
   el.classList.add("is-open");
