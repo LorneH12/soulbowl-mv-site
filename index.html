@@ -5,7 +5,10 @@
   <meta name="viewport" content="width=device-width, initial-scale=1.0" />
   <title>Soul Bowl · Visual Teaser</title>
   <link rel="stylesheet" href="styles.css" />
-  <meta name="description" content="Soul Bowl – a 1997 neon-soaked music-video style story experience. Step into the lanes." />
+  <meta
+    name="description"
+    content="Soul Bowl – a 1997 neon-soaked music-video style story experience. Step into the lanes."
+  />
 </head>
 <body>
   <header class="site-header">
@@ -22,20 +25,59 @@
 
   <!-- Progress dots on the right -->
   <aside class="scene-dots" aria-label="Scene navigation">
-    <button class="scene-dot is-active" data-target="#scene-1" aria-label="Intro"></button>
-    <button class="scene-dot" data-target="#scene-2" aria-label="Edward"></button>
-    <button class="scene-dot" data-target="#scene-3" aria-label="Kashuna"></button>
-    <button class="scene-dot" data-target="#scene-4" aria-label="Crowd"></button>
-    <button class="scene-dot" data-target="#scene-5" aria-label="Peak moment"></button>
-    <button class="scene-dot" data-target="#scene-6" aria-label="Credits"></button>
+    <button
+      class="scene-dot is-active"
+      data-target="#scene-1"
+      aria-label="Intro"
+    ></button>
+    <button
+      class="scene-dot"
+      data-target="#scene-2"
+      aria-label="Edward"
+    ></button>
+    <button
+      class="scene-dot"
+      data-target="#scene-3"
+      aria-label="Kashuna"
+    ></button>
+    <button
+      class="scene-dot"
+      data-target="#scene-4"
+      aria-label="Crowd"
+    ></button>
+    <button
+      class="scene-dot"
+      data-target="#scene-5"
+      aria-label="Peak moment"
+    ></button>
+    <button
+      class="scene-dot"
+      data-target="#scene-6"
+      aria-label="Credits"
+    ></button>
   </aside>
 
-  <main class="scenes">
+  <!-- Audio status widget -->
+  <div class="audio-widget" aria-label="Music status and control">
+    <div class="audio-bars" aria-hidden="true">
+      <span class="audio-bar audio-bar-1"></span>
+      <span class="audio-bar audio-bar-2"></span>
+      <span class="audio-bar audio-bar-3"></span>
+    </div>
+    <button type="button" class="audio-toggle" id="audio-toggle">
+      <span class="audio-label-text" id="audio-label">On</span>
+    </button>
+  </div>
 
+  <main class="scenes">
     <!-- SCENE 1 – TITLE CARD -->
     <section id="scene-1" class="scene scene--intro" data-scene="1">
-      <div class="scene-bg scene-bg--image"
-           style="background-image: url('assets/images/scene1-edward-title.jpg');"></div>
+      <div
+        class="scene-bg scene-bg--image"
+        style="
+          background-image: url('assets/images/scene1-edward-title.jpg');
+        "
+      ></div>
       <div class="scene-overlay"></div>
 
       <div class="scene-content">
@@ -46,7 +88,10 @@
         <p class="scene-kicker animate-in delay-1">
           1997 · Phoenix · One neon-soaked night at the lanes.
         </p>
-        <button class="primary-btn animate-in delay-2" data-scroll-target="#scene-2">
+        <button
+          class="primary-btn animate-in delay-2"
+          data-scroll-target="#scene-2"
+        >
           Step into the alley
         </button>
       </div>
@@ -54,8 +99,12 @@
 
     <!-- SCENE 2 – EDWARD CLOSE-UP -->
     <section id="scene-2" class="scene scene--character" data-scene="2">
-      <div class="scene-bg scene-bg--image"
-           style="background-image: url('assets/images/scene2-edward-close.jpg');"></div>
+      <div
+        class="scene-bg scene-bg--image"
+        style="
+          background-image: url('assets/images/scene2-edward-close.jpg');
+        "
+      ></div>
       <div class="scene-overlay scene-overlay--deep"></div>
 
       <div class="scene-content scene-content--split">
@@ -68,10 +117,14 @@
             One Soul Bowl.
           </h2>
           <p class="scene-text animate-in delay-1">
-            Part MC, part poet, Edward’s voice echoes over clattering pins and neon buzz.
-            Tonight, the alley is his stage—and the city is listening.
+            Part MC, part poet, Edward’s voice echoes over clattering pins and
+            neon buzz. Tonight, the alley is his stage—and the city is
+            listening.
           </p>
-          <button class="ghost-btn animate-in delay-2" data-scroll-target="#scene-3">
+          <button
+            class="ghost-btn animate-in delay-2"
+            data-scroll-target="#scene-3"
+          >
             Cut to Kashuna
           </button>
         </div>
@@ -80,8 +133,12 @@
 
     <!-- SCENE 3 – KASHUNA -->
     <section id="scene-3" class="scene scene--character" data-scene="3">
-      <div class="scene-bg scene-bg--image"
-           style="background-image: url('assets/images/scene3-kashuna.jpg');"></div>
+      <div
+        class="scene-bg scene-bg--image"
+        style="
+          background-image: url('assets/images/scene3-kashuna.jpg');
+        "
+      ></div>
       <div class="scene-overlay scene-overlay--purple"></div>
 
       <div class="scene-content scene-content--split scene-content--right">
@@ -93,10 +150,13 @@
             Protecting the vision.
           </h2>
           <p class="scene-text animate-in delay-1">
-            Kashuna doesn’t say much—but she sees everything. In the blur of lights
-            and bass, she’s the anchor keeping Edward grounded.
+            Kashuna doesn’t say much—but she sees everything. In the blur of
+            lights and bass, she’s the anchor keeping Edward grounded.
           </p>
-          <button class="ghost-btn animate-in delay-2" data-scroll-target="#scene-4">
+          <button
+            class="ghost-btn animate-in delay-2"
+            data-scroll-target="#scene-4"
+          >
             Feel the crowd
           </button>
         </div>
@@ -105,8 +165,12 @@
 
     <!-- SCENE 4 – CROWD GROOVE -->
     <section id="scene-4" class="scene scene--crowd" data-scene="4">
-      <div class="scene-bg scene-bg--image"
-           style="background-image: url('assets/images/scene4-crowd.jpg');"></div>
+      <div
+        class="scene-bg scene-bg--image"
+        style="
+          background-image: url('assets/images/scene4-crowd.jpg');
+        "
+      ></div>
       <div class="scene-overlay scene-overlay--blue"></div>
 
       <div class="scene-content">
@@ -116,10 +180,14 @@
           Every frame, a memory.
         </h2>
         <p class="scene-text animate-in delay-1">
-          Bowlers, dancers, dreamers—the Soul Bowl pulls the city into one long shot.
-          Laughs, side-eyes, inside jokes… then that one moment nobody forgets.
+          Bowlers, dancers, dreamers—the Soul Bowl pulls the city into one long
+          shot. Laughs, side-eyes, inside jokes… then that one moment nobody
+          forgets.
         </p>
-        <button class="primary-btn animate-in delay-2" data-scroll-target="#scene-5">
+        <button
+          class="primary-btn animate-in delay-2"
+          data-scroll-target="#scene-5"
+        >
           Go to the moment
         </button>
       </div>
@@ -127,21 +195,26 @@
 
     <!-- SCENE 5 – PEAK MOMENT -->
     <section id="scene-5" class="scene scene--moment" data-scene="5">
-      <div class="scene-bg scene-bg--image"
-           style="background-image: url('assets/images/scene5-call-and-response.jpg');"></div>
+      <div
+        class="scene-bg scene-bg--image"
+        style="
+          background-image: url('assets/images/scene5-call-and-response.jpg');
+        "
+      ></div>
       <div class="scene-overlay scene-overlay--crimson"></div>
 
       <div class="scene-content scene-content--center">
         <p class="eyebrow animate-in">The call-and-response</p>
-        <h2 class="scene-heading animate-in">
-          “When I say Soul…”
-        </h2>
+        <h2 class="scene-heading animate-in">“When I say Soul…”</h2>
         <p class="scene-text animate-in delay-1">
-          Hands rise. Voices stack. The alley becomes a choir.
-          In that instant, the night flips from just another show
-          to a story people tell for years.
+          Hands rise. Voices stack. The alley becomes a choir. In that instant,
+          the night flips from just another show to a story people tell for
+          years.
         </p>
-        <button class="primary-btn animate-in delay-2" data-scroll-target="#scene-6">
+        <button
+          class="primary-btn animate-in delay-2"
+          data-scroll-target="#scene-6"
+        >
           Roll credits
         </button>
       </div>
@@ -149,26 +222,25 @@
 
     <!-- SCENE 6 – CREDITS / CTA -->
     <section id="scene-6" class="scene scene--credits" data-scene="6">
-      <div class="scene-bg scene-bg--image"
-           style="background-image: url('assets/images/scene6-credits.jpg');"></div>
+      <div
+        class="scene-bg scene-bg--image"
+        style="
+          background-image: url('assets/images/scene6-credits.jpg');
+        "
+      ></div>
       <div class="scene-overlay scene-overlay--soft"></div>
 
       <div class="scene-content scene-content--center">
         <p class="eyebrow animate-in">A LAJH Visual Storyworld</p>
-        <h2 class="scene-heading animate-in">
-          SOUL BOWL
-        </h2>
+        <h2 class="scene-heading animate-in">SOUL BOWL</h2>
         <p class="scene-text animate-in delay-1">
-          This site is a music-video style teaser for the Soul Bowl universe—
-          a 1997-inspired story about sound, loyalty, and one unforgettable night at the lanes.
+          This site is a music-video style teaser for the Soul Bowl universe—a
+          1997-inspired story about sound, loyalty, and one unforgettable night
+          at the lanes.
         </p>
         <div class="credits-actions animate-in delay-2">
-          <a href="#" class="primary-btn">
-            Watch the teaser (coming soon)
-          </a>
-          <a href="#" class="ghost-btn">
-            Meet the characters
-          </a>
+          <a href="#" class="primary-btn"> Watch the teaser (coming soon) </a>
+          <a href="#" class="ghost-btn"> Meet the characters </a>
         </div>
         <p class="credits-footnote animate-in delay-3">
           © <span id="year"></span> LAJH Endeavors PLLC · Soul Bowl Project
@@ -177,15 +249,14 @@
     </section>
   </main>
 
+  <!-- Intro beat audio -->
+  <audio
+    id="intro-audio"
+    src="assets/intro-beat.wav"
+    preload="auto"
+    loop
+  ></audio>
+
   <script src="script.js"></script>
-
-  <!-- Intro beat audio (plays on first interaction) -->
-  <audio id="intro-audio" src="assets/intro-beat.wav" preload="auto"></audio>
-
-  <script src="script.js"></script>
-</body>
-</html>
-
-  
 </body>
 </html>
