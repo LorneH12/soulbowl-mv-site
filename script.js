@@ -4,6 +4,31 @@ if (yearSpan) {
   yearSpan.textContent = new Date().getFullYear();
 }
 
+// Intro audio (plays on first interaction)
+const introAudio = document.getElementById("intro-audio");
+let hasPlayedIntro = false;
+
+function tryPlayIntro() {
+  if (hasPlayedIntro || !introAudio) return;
+
+  // optional: adjust volume
+  introAudio.volume = 0.9;
+
+  introAudio
+    .play()
+    .then(() => {
+      hasPlayedIntro = true;
+    })
+    .catch(() => {
+      // autoplay may be blocked; user will trigger it on a later interaction
+    });
+}
+
+// Listen for first user interaction to trigger audio
+["click", "keydown", "wheel", "touchstart"].forEach((ev) => {
+  document.addEventListener(ev, tryPlayIntro, { once: false });
+});
+
 // Smooth scroll helper
 function smoothScrollTo(targetSelector) {
   const el = document.querySelector(targetSelector);
@@ -59,7 +84,7 @@ dots.forEach((dot) => {
   });
 });
 
-// Optional: small cursor-based lighting shift (desktop only)
+// Cursor-based lighting (spotlight), desktop only
 const scenesContainer = document.querySelector(".scenes");
 
 if (scenesContainer && window.matchMedia("(pointer: fine)").matches) {
@@ -70,7 +95,6 @@ if (scenesContainer && window.matchMedia("(pointer: fine)").matches) {
     const x = (clientX - rect.left) / rect.width;
     const y = (clientY - rect.top) / rect.height;
 
-    // CSS variables for potential lighting effects
     document.documentElement.style.setProperty("--cursor-x", x.toString());
     document.documentElement.style.setProperty("--cursor-y", y.toString());
   });
