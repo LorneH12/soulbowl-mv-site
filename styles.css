@@ -162,7 +162,8 @@ body {
   position: absolute;
   inset: 0;
   background-size: cover;
-  background-position: center;
+  /* bias image content to the right so text on left stays clear */
+  background-position: 75% center;
   filter: saturate(1.1) contrast(1.05);
   transform: scale(1.1) translate3d(0, 0, 0);
   will-change: transform;
@@ -271,11 +272,12 @@ body.audio-is-playing .scene-overlay {
   justify-content: flex-end;
 }
 
+/* was centered; now left-aligned for readability over left side of frame */
 .scene-content--center {
   display: flex;
   flex-direction: column;
-  align-items: center;
-  text-align: center;
+  align-items: flex-start;
+  text-align: left;
 }
 
 .scene-copy {
