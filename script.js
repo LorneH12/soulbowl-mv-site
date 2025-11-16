@@ -6,28 +6,72 @@ if (yearSpan) {
 
 // Intro audio (plays on first interaction)
 const introAudio = document.getElementById("intro-audio");
-let hasPlayedIntro = false;
+let hasTriedPlayIntro = false;
 
+const audioToggleBtn = document.getElementById("audio-toggle");
+const audioLabel = document.getElementById("audio-label");
+
+// Update body classes + label for audio UI state
+function setAudioUIState(isPlaying) {
+  if (isPlaying) {
+    document.body.classList.add("audio-is-playing");
+    document.body.classList.remove("audio-is-muted");
+    if (audioLabel) audioLabel.textContent = "On";
+  } else {
+    document.body.classList.remove("audio-is-playing");
+    document.body.classList.add("audio-is-muted");
+    if (audioLabel) audioLabel.textContent = "Off";
+  }
+}
+
+// Try to play intro audio (respecting browser autoplay rules)
 function tryPlayIntro() {
-  if (hasPlayedIntro || !introAudio) return;
+  if (!introAudio) return;
 
-  // optional: adjust volume
+  // We can try multiple times, but don't spam
+  if (!hasTriedPlayIntro) {
+    hasTriedPlayIntro = true;
+  }
+
   introAudio.volume = 0.9;
 
   introAudio
     .play()
     .then(() => {
-      hasPlayedIntro = true;
+      setAudioUIState(true);
     })
     .catch(() => {
-      // autoplay may be blocked; user will trigger it on a later interaction
+      // Autoplay blocked; user will toggle manually later
+      setAudioUIState(false);
     });
 }
 
-// Listen for first user interaction to trigger audio
+// Listen for first user interactions to trigger audio try
 ["click", "keydown", "wheel", "touchstart"].forEach((ev) => {
   document.addEventListener(ev, tryPlayIntro, { once: false });
 });
+
+// Toggle button: user can manually play/pause
+if (audioToggleBtn && introAudio) {
+  audioToggleBtn.addEventListener("click", () => {
+    if (introAudio.paused) {
+      introAudio
+        .play()
+        .then(() => setAudioUIState(true))
+        .catch(() => setAudioUIState(false));
+    } else {
+      introAudio.pause();
+      setAudioUIState(false);
+    }
+  });
+}
+
+// Keep UI in sync with actual audio events
+if (introAudio) {
+  introAudio.addEventListener("play", () => setAudioUIState(true));
+  introAudio.addEventListener("pause", () => setAudioUIState(false));
+  introAudio.addEventListener("ended", () => setAudioUIState(false));
+}
 
 // Smooth scroll helper
 function smoothScrollTo(targetSelector) {
