@@ -32,12 +32,10 @@ if (introAudio) {
   introAudio
     .play()
     .then(() => {
-      // playing successfully, nothing else to do
+      // playing successfully
     })
     .catch(() => {
-      // Browser blocked autoplay: visually show "On" & bars,
-      // but there won't be sound until user clicks.
-      // That's okay; first click will really start audio.
+      // Browser blocked autoplay: UI still shows On, sound will come when user presses the toggle
     });
 }
 
@@ -50,7 +48,6 @@ if (audioToggleBtn && introAudio) {
         .play()
         .then(() => setAudioUIState(true))
         .catch(() => {
-          // Even if it can't play, keep UI as "On"
           setAudioUIState(true);
         });
     } else {
@@ -61,7 +58,7 @@ if (audioToggleBtn && introAudio) {
   });
 }
 
-// Keep UI in sync with actual audio events (safety net)
+// Keep UI in sync with actual audio events
 if (introAudio) {
   introAudio.addEventListener("play", () => setAudioUIState(true));
   introAudio.addEventListener("pause", () => setAudioUIState(false));
@@ -138,3 +135,75 @@ if (scenesContainer && window.matchMedia("(pointer: fine)").matches) {
     document.documentElement.style.setProperty("--cursor-y", y.toString());
   });
 }
+
+// ---------- OVERLAYS (CHARACTERS & TEASER) ----------
+const charactersOverlay = document.getElementById("characters-overlay");
+const charactersOverlayBackdrop = document.getElementById(
+  "characters-overlay-backdrop"
+);
+const openCharactersBtn = document.getElementById("open-characters");
+const closeCharactersBtn = document.getElementById("close-characters");
+
+const teaserOverlay = document.getElementById("teaser-overlay");
+const teaserOverlayBackdrop = document.getElementById(
+  "teaser-overlay-backdrop"
+);
+const openTeaserBtn = document.getElementById("open-teaser-modal");
+const closeTeaserBtn = document.getElementById("close-teaser");
+
+// Helpers to open/close overlays
+function openOverlay(el) {
+  if (!el) return;
+  el.classList.add("is-open");
+}
+
+function closeOverlay(el) {
+  if (!el) return;
+  el.classList.remove("is-open");
+}
+
+// Characters overlay events
+if (openCharactersBtn && charactersOverlay) {
+  openCharactersBtn.addEventListener("click", () => {
+    openOverlay(charactersOverlay);
+  });
+}
+
+if (closeCharactersBtn && charactersOverlay) {
+  closeCharactersBtn.addEventListener("click", () => {
+    closeOverlay(charactersOverlay);
+  });
+}
+
+if (charactersOverlayBackdrop && charactersOverlay) {
+  charactersOverlayBackdrop.addEventListener("click", () => {
+    closeOverlay(charactersOverlay);
+  });
+}
+
+// Teaser overlay events
+if (openTeaserBtn && teaserOverlay) {
+  openTeaserBtn.addEventListener("click", () => {
+    openOverlay(teaserOverlay);
+  });
+}
+
+if (closeTeaserBtn && teaserOverlay) {
+  closeTeaserBtn.addEventListener("click", () => {
+    closeOverlay(teaserOverlay);
+  });
+}
+
+if (teaserOverlayBackdrop && teaserOverlay) {
+  teaserOverlayBackdrop.addEventListener("click", () => {
+    closeOverlay(teaserOverlay);
+  });
+}
+
+// Close overlays on Escape key
+document.addEventListener("keydown", (event) => {
+  if (event.key === "Escape") {
+    closeOverlay(charactersOverlay);
+    closeOverlay(teaserOverlay);
+  }
+});
