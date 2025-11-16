@@ -272,7 +272,7 @@ body.audio-is-playing .scene-overlay {
   justify-content: flex-end;
 }
 
-/* was centered; now left-aligned for readability over left side of frame */
+/* previously centered; now always left-aligned */
 .scene-content--center {
   display: flex;
   flex-direction: column;
@@ -281,7 +281,23 @@ body.audio-is-playing .scene-overlay {
 }
 
 .scene-copy {
-  max-width: 550px;
+  position: relative;
+  max-width: 560px;
+  padding: 1.75rem 1.75rem 2rem;
+  border-radius: 1.5rem;
+  background: radial-gradient(
+      circle at top left,
+      rgba(15, 23, 42, 0.96),
+      rgba(15, 23, 42, 0.85)
+    );
+  border: 1px solid rgba(148, 163, 253, 0.65);
+  box-shadow: 0 18px 45px rgba(15, 23, 42, 0.95);
+  backdrop-filter: blur(18px);
+}
+
+/* hero card sits slightly lower to avoid header overlap visually */
+.scene-copy--hero {
+  margin-top: 2.5rem;
 }
 
 .scene-title {
@@ -790,7 +806,13 @@ body.audio-is-muted .now-playing-dot {
   }
 }
 
-/* -------- Responsive -------- */
+/* -------- Responsive & Motion Preferences -------- */
+
+@media (min-width: 1200px) {
+  .scene-content {
+    padding-inline: 3rem;
+  }
+}
 
 @media (max-width: 900px) {
   body {
@@ -809,16 +831,20 @@ body.audio-is-muted .now-playing-dot {
     align-items: flex-end;
   }
 
+  .scene-bg {
+    /* center subject more on mobile so we don’t lose faces */
+    background-position: center;
+  }
+
   .scene-copy {
-    background: linear-gradient(
-      to top,
-      rgba(15, 23, 42, 0.9),
-      rgba(15, 23, 42, 0.2),
-      transparent
-    );
-    padding: 1.75rem 1.25rem 2.25rem;
-    border-radius: 1.4rem 1.4rem 0 0;
-    box-shadow: 0 -12px 40px rgba(15, 23, 42, 0.9);
+    max-width: 100%;
+    padding: 1.4rem 1.25rem 1.9rem;
+    border-radius: 1.4rem;
+    margin-top: 1.5rem;
+  }
+
+  .scene-copy--hero {
+    margin-top: 3.5rem;
   }
 
   .scene-dots {
@@ -860,5 +886,15 @@ body.audio-is-muted .now-playing-dot {
 
   .now-playing-label {
     display: none; /* keep just dot + button on tiny screens */
+  }
+}
+
+/* Reduced motion preferences */
+@media (prefers-reduced-motion: reduce) {
+  * {
+    scroll-behavior: auto !important;
+    animation-duration: 0.01ms !important;
+    animation-iteration-count: 1 !important;
+    transition: none !important;
   }
 }
