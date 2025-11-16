@@ -1,16 +1,13 @@
-// Set current year in credits
+// ---------- YEAR IN FOOTER ----------
 const yearSpan = document.getElementById("year");
 if (yearSpan) {
   yearSpan.textContent = new Date().getFullYear();
 }
 
-// Intro audio element
+// ---------- AUDIO LOGIC ----------
 const introAudio = document.getElementById("intro-audio");
 const audioToggleBtn = document.getElementById("audio-toggle");
 const audioLabel = document.getElementById("audio-label");
-
-// Make sure we only auto-play ONCE
-let hasAutoplayAttempted = false;
 
 // Update body classes + label for audio UI state
 function setAudioUIState(isPlaying) {
@@ -25,55 +22,53 @@ function setAudioUIState(isPlaying) {
   }
 }
 
-// Try to play intro audio (respecting browser autoplay rules)
-function tryPlayIntro() {
-  if (!introAudio) return;
-
-  // ⛔️ If we've already tried once, don't auto-play again
-  if (hasAutoplayAttempted) return;
-  hasAutoplayAttempted = true;
-
+// Try to start audio on load (music starts ON)
+if (introAudio) {
   introAudio.volume = 0.9;
+
+  // Start with UI as "On" + bars moving
+  setAudioUIState(true);
 
   introAudio
     .play()
     .then(() => {
-      setAudioUIState(true);
+      // playing successfully, nothing else to do
     })
     .catch(() => {
-      // Autoplay blocked; user will toggle manually later
-      setAudioUIState(false);
+      // Browser blocked autoplay: visually show "On" & bars,
+      // but there won't be sound until user clicks.
+      // That's okay; first click will really start audio.
     });
 }
 
-// Listen for first user interactions to trigger a single autoplay attempt
-["click", "keydown", "wheel", "touchstart"].forEach((ev) => {
-  document.addEventListener(ev, tryPlayIntro, { once: false });
-});
-
-// Toggle button: user can manually play/pause
+// Toggle audio on button click
 if (audioToggleBtn && introAudio) {
   audioToggleBtn.addEventListener("click", () => {
     if (introAudio.paused) {
+      // Turn ON
       introAudio
         .play()
         .then(() => setAudioUIState(true))
-        .catch(() => setAudioUIState(false));
+        .catch(() => {
+          // Even if it can't play, keep UI as "On"
+          setAudioUIState(true);
+        });
     } else {
+      // Turn OFF
       introAudio.pause();
       setAudioUIState(false);
     }
   });
 }
 
-// Keep UI in sync with actual audio events
+// Keep UI in sync with actual audio events (safety net)
 if (introAudio) {
   introAudio.addEventListener("play", () => setAudioUIState(true));
   introAudio.addEventListener("pause", () => setAudioUIState(false));
   introAudio.addEventListener("ended", () => setAudioUIState(false));
 }
 
-// Smooth scroll helper
+// ---------- SMOOTH SCROLL ----------
 function smoothScrollTo(targetSelector) {
   const el = document.querySelector(targetSelector);
   if (!el) return;
@@ -88,7 +83,7 @@ document.querySelectorAll("[data-scroll-target]").forEach((btn) => {
   });
 });
 
-// IntersectionObserver for scene visibility & animation triggers
+// ---------- INTERSECTION OBSERVER (SCENE TRANSITIONS) ----------
 const scenes = document.querySelectorAll(".scene");
 const dots = document.querySelectorAll(".scene-dot");
 
@@ -120,7 +115,7 @@ const observer = new IntersectionObserver(
 
 scenes.forEach((scene) => observer.observe(scene));
 
-// Dot navigation
+// ---------- DOT NAVIGATION ----------
 dots.forEach((dot) => {
   dot.addEventListener("click", () => {
     const target = dot.getAttribute("data-target");
@@ -128,7 +123,7 @@ dots.forEach((dot) => {
   });
 });
 
-// Cursor-based lighting (spotlight), desktop only
+// ---------- CURSOR-BASED LIGHTING (DESKTOP ONLY) ----------
 const scenesContainer = document.querySelector(".scenes");
 
 if (scenesContainer && window.matchMedia("(pointer: fine)").matches) {
