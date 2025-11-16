@@ -136,6 +136,31 @@ if (scenesContainer && window.matchMedia("(pointer: fine)").matches) {
   });
 }
 
+// ---------- PARALLAX BACKGROUNDS ----------
+function updateParallax() {
+  if (!scenesContainer) return;
+
+  const viewportCenter = window.innerHeight / 2;
+
+  scenes.forEach((scene) => {
+    const bg = scene.querySelector(".scene-bg");
+    if (!bg) return;
+
+    const rect = scene.getBoundingClientRect();
+    const sceneCenter = rect.top + rect.height / 2;
+    const offset = sceneCenter - viewportCenter; // positive = below center
+
+    const intensity = -offset * 0.06; // tweak multiplier for strength
+    bg.style.transform = `scale(1.1) translate3d(0, ${intensity}px, 0)`;
+  });
+}
+
+if (scenesContainer) {
+  scenesContainer.addEventListener("scroll", updateParallax);
+  window.addEventListener("resize", updateParallax);
+  window.addEventListener("load", updateParallax);
+}
+
 // ---------- OVERLAYS (CHARACTERS & TEASER) ----------
 const charactersOverlay = document.getElementById("characters-overlay");
 const charactersOverlayBackdrop = document.getElementById(
