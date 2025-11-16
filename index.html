@@ -86,7 +86,7 @@
           <span class="title-line">BOWL</span>
         </h1>
         <p class="scene-kicker animate-in delay-1">
-          1997 · Phoenix · One neon-soaked night at the lanes.
+          Phoenix, 1997. A Brunswick bowling alley flips into a hip-hop sanctuary for young dreams, loud rivalries, and one night that changes everything.
         </p>
         <button
           class="primary-btn animate-in delay-2"
@@ -109,17 +109,13 @@
 
       <div class="scene-content scene-content--split">
         <div class="scene-copy">
-          <p class="eyebrow animate-in">Edward Thomas</p>
+          <p class="eyebrow animate-in">Edward Thomas · The Voice of Soul Bowl</p>
           <h2 class="scene-heading animate-in">
-            1997. <br />
-            One night. <br />
-            One shot. <br />
-            One Soul Bowl.
+            A benchwarmer in the gym. <br />
+            A headliner on the mic.
           </h2>
           <p class="scene-text animate-in delay-1">
-            Part MC, part poet, Edward’s voice echoes over clattering pins and
-            neon buzz. Tonight, the alley is his stage—and the city is
-            listening.
+            Edward is an 18-year-old MC with guarded confidence and a gift for crowd control. At Soul Bowl, his voice turns a dying Sunday night bowling alley into the city’s most charged under-21 club.
           </p>
           <button
             class="ghost-btn animate-in delay-2"
@@ -143,15 +139,13 @@
 
       <div class="scene-content scene-content--split scene-content--right">
         <div class="scene-copy">
-          <p class="eyebrow animate-in">Kashuna Williams</p>
+          <p class="eyebrow animate-in">Kashuna Williams · The Heart</p>
           <h2 class="scene-heading animate-in">
-            Watching the lanes. <br />
-            Reading the room. <br />
-            Protecting the vision.
+            The calm in his storm. <br />
+            The one reading the room.
           </h2>
           <p class="scene-text animate-in delay-1">
-            Kashuna doesn’t say much—but she sees everything. In the blur of
-            lights and bass, she’s the anchor keeping Edward grounded.
+            Kashuna is sharp, compassionate, and street-savvy. She believes in Edward’s talent but refuses to be blinded by the spotlight. While everyone else chases the night, she’s quietly protecting the vision—and him.
           </p>
           <button
             class="ghost-btn animate-in delay-2"
@@ -175,14 +169,12 @@
 
       <div class="scene-content">
         <h2 class="scene-heading animate-in">
-          Lanes packed. <br />
-          Lights low. <br />
-          Every frame, a memory.
+          West side Maryvale. <br />
+          Two lines at the door. <br />
+          One city inside.
         </h2>
         <p class="scene-text animate-in delay-1">
-          Bowlers, dancers, dreamers—the Soul Bowl pulls the city into one long
-          shot. Laughs, side-eyes, inside jokes… then that one moment nobody
-          forgets.
+          Kids line up in fits they saved for all week—bowlers, dancers, ball players, and dreamers. Soul Bowl becomes the weekly ritual where under-21 Phoenix shows up to sweat, stunt, and be seen.
         </p>
         <button
           class="primary-btn animate-in delay-2"
@@ -204,12 +196,14 @@
       <div class="scene-overlay scene-overlay--crimson"></div>
 
       <div class="scene-content scene-content--center">
-        <p class="eyebrow animate-in">The call-and-response</p>
-        <h2 class="scene-heading animate-in">“When I say Soul…”</h2>
+        <p class="eyebrow animate-in">Rhythm · Rivalry · Fallout</p>
+        <h2 class="scene-heading animate-in">
+          One call-and-response. <br />
+          One gunshot. <br />
+          One night that echoes for years.
+        </h2>
         <p class="scene-text animate-in delay-1">
-          Hands rise. Voices stack. The alley becomes a choir. In that instant,
-          the night flips from just another show to a story people tell for
-          years.
+          As Edward’s voice rises and the alley hits full capacity, Malcolm Champion, the fallen hometown basketball star, arrives with something to prove. When ego, envy, and bass collide, the party that built a community gets pushed to the edge.
         </p>
         <button
           class="primary-btn animate-in delay-2"
@@ -231,16 +225,18 @@
       <div class="scene-overlay scene-overlay--soft"></div>
 
       <div class="scene-content scene-content--center">
-        <p class="eyebrow animate-in">A LAJH Visual Storyworld</p>
+        <p class="eyebrow animate-in">Feature Film · Based on a true story</p>
         <h2 class="scene-heading animate-in">SOUL BOWL</h2>
         <p class="scene-text animate-in delay-1">
-          This site is a music-video style teaser for the Soul Bowl universe—a
-          1997-inspired story about sound, loyalty, and one unforgettable night
-          at the lanes.
+          A coming-of-age drama set inside a 90s hip-hop bowling night on the west side of Phoenix. Soul Bowl follows Edward, Kashuna, and Malcolm as ambition, love, and pressure collide under neon lights and a low ceiling.
         </p>
         <div class="credits-actions animate-in delay-2">
-          <a href="#" class="primary-btn"> Watch the teaser (coming soon) </a>
-          <a href="#" class="ghost-btn"> Meet the characters </a>
+          <button type="button" class="primary-btn" id="open-teaser-modal">
+            Watch the teaser (coming soon)
+          </button>
+          <button type="button" class="ghost-btn" id="open-characters">
+            Meet the characters
+          </button>
         </div>
         <p class="credits-footnote animate-in delay-3">
           © <span id="year"></span> LAJH Endeavors PLLC · Soul Bowl Project
@@ -248,6 +244,90 @@
       </div>
     </section>
   </main>
+
+  <!-- Character Gallery Overlay -->
+  <div
+    class="overlay overlay--characters"
+    id="characters-overlay"
+    aria-hidden="true"
+  >
+    <div class="overlay-backdrop" id="characters-overlay-backdrop"></div>
+    <div class="overlay-panel" role="dialog" aria-modal="true" aria-label="Soul Bowl characters">
+      <button class="overlay-close" type="button" id="close-characters">
+        ✕
+      </button>
+
+      <p class="overlay-eyebrow">Soul Bowl · Core Cast</p>
+      <h2 class="overlay-title">Meet the characters</h2>
+      <p class="overlay-text">
+        Three young lives crossing under the glow of a west side bowling alley—each pulling the night in a different direction.
+      </p>
+
+      <div class="character-grid">
+        <!-- Edward -->
+        <article class="character-card">
+          <p class="character-tag">The Voice</p>
+          <h3 class="character-name">Edward Thomas</h3>
+          <p class="character-role">MC · Protagonist</p>
+          <p class="character-body">
+            18, confident, magnetic, and protective. Edward turns Soul Bowl into a movement with nothing but a mic, hustle, and a crew of friends trying to get out from under dead-end jobs and family pressure.
+          </p>
+          <p class="character-quote">
+            “Guarded confidence, a star in the making, tethered by loyalty.”
+          </p>
+        </article>
+
+        <!-- Kashuna -->
+        <article class="character-card">
+          <p class="character-tag">The Heart</p>
+          <h3 class="character-name">Kashuna Williams</h3>
+          <p class="character-role">Love Interest · Confidant</p>
+          <p class="character-body">
+            18, compassionate, honest to a fault, and street savvy. Kashuna is the calm in Edward’s storm—calling out his blind spots, protecting his peace, and refusing to let the night or the fame swallow who he really is.
+          </p>
+          <p class="character-quote">
+            “The quiet strength guiding him through.”
+          </p>
+        </article>
+
+        <!-- Malcolm -->
+        <article class="character-card">
+          <p class="character-tag">The Force</p>
+          <h3 class="character-name">Malcolm Champion</h3>
+          <p class="character-role">Power Forward · Antagonist</p>
+          <p class="character-body">
+            18, a born leader carrying the weight of expectation. After a crushing loss on the court and a future slipping away, seeing Edward rise at Soul Bowl cuts deep—turning a packed Sunday night into a pressure cooker.
+          </p>
+          <p class="character-quote">
+            “A born champion, haunted by a missed shot.”
+          </p>
+        </article>
+      </div>
+    </div>
+  </div>
+
+  <!-- Teaser Modal (simple placeholder for now) -->
+  <div
+    class="overlay overlay--teaser"
+    id="teaser-overlay"
+    aria-hidden="true"
+  >
+    <div class="overlay-backdrop" id="teaser-overlay-backdrop"></div>
+    <div class="overlay-panel overlay-panel--compact" role="dialog" aria-modal="true" aria-label="Soul Bowl teaser">
+      <button class="overlay-close" type="button" id="close-teaser">
+        ✕
+      </button>
+
+      <p class="overlay-eyebrow">Visual teaser</p>
+      <h2 class="overlay-title">Soul Bowl teaser coming soon</h2>
+      <p class="overlay-text">
+        This space will showcase a short visual teaser cut from the Soul Bowl universe—Edward on the mic, Kashuna watching the room, Malcolm at the door, and the alley at full tilt.
+      </p>
+      <p class="overlay-text">
+        For now, use this site as a living storyboard—each frame hinting at how the film moves, sounds, and feels.
+      </p>
+    </div>
+  </div>
 
   <!-- Intro beat audio -->
   <audio
