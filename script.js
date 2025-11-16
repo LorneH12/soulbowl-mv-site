@@ -4,12 +4,13 @@ if (yearSpan) {
   yearSpan.textContent = new Date().getFullYear();
 }
 
-// Intro audio (plays on first interaction)
+// Intro audio element
 const introAudio = document.getElementById("intro-audio");
-let hasTriedPlayIntro = false;
-
 const audioToggleBtn = document.getElementById("audio-toggle");
 const audioLabel = document.getElementById("audio-label");
+
+// Make sure we only auto-play ONCE
+let hasAutoplayAttempted = false;
 
 // Update body classes + label for audio UI state
 function setAudioUIState(isPlaying) {
@@ -28,10 +29,9 @@ function setAudioUIState(isPlaying) {
 function tryPlayIntro() {
   if (!introAudio) return;
 
-  // We can try multiple times, but don't spam
-  if (!hasTriedPlayIntro) {
-    hasTriedPlayIntro = true;
-  }
+  // ⛔️ If we've already tried once, don't auto-play again
+  if (hasAutoplayAttempted) return;
+  hasAutoplayAttempted = true;
 
   introAudio.volume = 0.9;
 
@@ -46,7 +46,7 @@ function tryPlayIntro() {
     });
 }
 
-// Listen for first user interactions to trigger audio try
+// Listen for first user interactions to trigger a single autoplay attempt
 ["click", "keydown", "wheel", "touchstart"].forEach((ev) => {
   document.addEventListener(ev, tryPlayIntro, { once: false });
 });
